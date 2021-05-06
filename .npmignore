@@ -5,3 +5,6 @@ logo
 lint
 scripts
 .idea
+.github
+precommit.sh
+node_modules

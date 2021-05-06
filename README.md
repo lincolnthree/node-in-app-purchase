@@ -1,3 +1,8 @@
+## This is a fork of https://www.github.com/voltrue2/in-app-purchase
+The intent is to support newer versions of the billing APIs, e.g. Google now requires purchases to be acknowledged
+
+### Original unmodified README follows
+
 ![Logo](https://user-images.githubusercontent.com/2267361/42299566-e25ee852-8046-11e8-9cc3-a776770fcc8e.png)
 
 ©Nobuyori Takahashi < <voltrue2@yahoo.com> >
