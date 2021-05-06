@@ -1,4 +1,4 @@
-var assert = require('assert'); 
+var assert = require('assert');
 var fs = require('fs');
 var fixedPath = process.cwd() + '/test/receipts/google';
 var fixedPkPath = process.cwd() + '/test/receipts/google_pub/';
@@ -8,11 +8,11 @@ describe('#### Google ####', function () {
     /**************************
     * With Public Key From FS *
     ***************************/
-        
+
     it('Cannot validate google in-app-purchase with a receipt.data that is not a string', function (done) {
-        
-        var path = process.argv[process.argv.length - 2].replace('--path=', '');
-        var pkPath = process.argv[process.argv.length - 1].replace('--pk=', '');
+
+        var path = process.argv[process.argv.length - 2].replace('--path=', '') || 'false';
+        var pkPath = process.argv[process.argv.length - 1].replace('--pk=', '') || 'false';
 
         if (path === 'false') {
             path = fixedPath;
@@ -42,11 +42,11 @@ describe('#### Google ####', function () {
         });
 
     });
-        
+
     it('Can validate Unity google in-app-purchase w/ auto-service detection', function (done) {
-    
-        var path = process.cwd() + '/test/receipts/unity_google';    
-        var pkPath = process.argv[process.argv.length - 1].replace('--pk=', '');
+
+        var path = process.cwd() + '/test/receipts/unity_google';
+        var pkPath = process.argv[process.argv.length - 1].replace('--pk=', '') || 'false';
 
         if (pkPath === 'false') {
             pkPath = fixedPkPath;
@@ -78,13 +78,13 @@ describe('#### Google ####', function () {
                 });
             });
         });
-    
+
     });
-        
+
     it('Can validate google in-app-purchase w/ auto-service detection', function (done) {
-        
-        var path = process.argv[process.argv.length - 2].replace('--path=', '');
-        var pkPath = process.argv[process.argv.length - 1].replace('--pk=', '');
+
+        var path = process.argv[process.argv.length - 2].replace('--path=', '') || 'false';
+        var pkPath = process.argv[process.argv.length - 1].replace('--pk=', '') || 'false';
 
         if (path === 'false') {
             path = fixedPath;
@@ -119,17 +119,17 @@ describe('#### Google ####', function () {
                 });
             });
         });
-    
+
     });
-        
+
     it('Can validate google in-app-purchase w/ Promise & auto service detection', function (done) {
-    
+
         if (!Promise) {
             return done();
         }
-    
-        var path = process.argv[process.argv.length - 2].replace('--path=', '');
-        var pkPath = process.argv[process.argv.length - 1].replace('--pk=', '');
+
+        var path = process.argv[process.argv.length - 2].replace('--path=', '') || 'false';
+        var pkPath = process.argv[process.argv.length - 1].replace('--pk=', '') || 'false';
 
         if (path === 'false') {
             path = fixedPath;
@@ -165,13 +165,13 @@ describe('#### Google ####', function () {
         }).catch(function (error) {
             throw error;
         });
-    
+
     });
-        
+
     it('Can validate google in-app-purchase', function (done) {
-        
-        var path = process.argv[process.argv.length - 2].replace('--path=', '');
-        var pkPath = process.argv[process.argv.length - 1].replace('--pk=', '');
+
+        var path = process.argv[process.argv.length - 2].replace('--path=', '') || 'false';
+        var pkPath = process.argv[process.argv.length - 1].replace('--pk=', '') || 'false';
 
         if (path === 'false') {
             path = fixedPath;
@@ -206,13 +206,13 @@ describe('#### Google ####', function () {
                 });
             });
         });
-    
+
     });
-        
+
     it('Can auto-stringify purchase receipt object and validate google in-app-purchase', function (done) {
-        
-        var path = process.argv[process.argv.length - 2].replace('--path=', '');
-        var pkPath = process.argv[process.argv.length - 1].replace('--pk=', '');
+
+        var path = process.argv[process.argv.length - 2].replace('--path=', '') || 'false';
+        var pkPath = process.argv[process.argv.length - 1].replace('--pk=', '') || 'false';
 
         if (path === 'false') {
             path = fixedPath;
@@ -246,13 +246,13 @@ describe('#### Google ####', function () {
                 });
             });
         });
-    
+
     });
-    
+
     it('Can NOT validate google in-app-purchase with incorrect receipt w/ auto-service detection', function (done) {
-        
-        var path = process.argv[process.argv.length - 2].replace('--path=', '');
-        var pkPath = process.argv[process.argv.length - 1].replace('--pk=', '');
+
+        var path = process.argv[process.argv.length - 2].replace('--path=', '') || 'false';
+        var pkPath = process.argv[process.argv.length - 1].replace('--pk=', '') || 'false';
 
         if (path === 'false') {
             path = fixedPath;
@@ -274,13 +274,13 @@ describe('#### Google ####', function () {
                 done();
             });
         });
-    
+
     });
-    
+
     it('Can NOT validate google in-app-purchase with incorrect receipt', function (done) {
-        
-        var path = process.argv[process.argv.length - 2].replace('--path=', '');
-        var pkPath = process.argv[process.argv.length - 1].replace('--pk=', '');
+
+        var path = process.argv[process.argv.length - 2].replace('--path=', '') || 'false';
+        var pkPath = process.argv[process.argv.length - 1].replace('--pk=', '') || 'false';
 
         if (path === 'false') {
             path = fixedPath;
@@ -302,13 +302,13 @@ describe('#### Google ####', function () {
                 done();
             });
         });
-    
+
     });
-        
+
     it('Can validate google in-app-purchase and check subscription state and fail', function (done) {
-        
-        var path = process.argv[process.argv.length - 2].replace('--path=', '');
-        var pkPath = process.argv[process.argv.length - 1].replace('--pk=', '');
+
+        var path = process.argv[process.argv.length - 2].replace('--path=', '') || 'false';
+        var pkPath = process.argv[process.argv.length - 1].replace('--pk=', '') || 'false';
 
         if (path === 'false') {
             path = fixedPath;
@@ -340,18 +340,18 @@ describe('#### Google ####', function () {
                 });
             });
         });
-    
+
     });
 
     // /****************************
     // * With Public Key As String *
     // ****************************/
-        
+
     it('Can validate google in-app-purchase with public key as string "googlePublicKeyStrLive"', function (done) {
-    
-        var exec = require('child_process').exec;    
-        var path = process.argv[process.argv.length - 2].replace('--path=', '');
-        var pkPath = process.argv[process.argv.length - 1].replace('--pk=', '');
+
+        var exec = require('child_process').exec;
+        var path = process.argv[process.argv.length - 2].replace('--path=', '') || 'false';
+        var pkPath = process.argv[process.argv.length - 1].replace('--pk=', '') || 'false';
 
         if (path === 'false') {
             path = fixedPath;
@@ -394,14 +394,14 @@ describe('#### Google ####', function () {
                 });
             });
         });
-    
+
     });
-        
+
     it('Can validate google in-app-purchase with public key as string "googlePublicKeyStrLive"', function (done) {
-    
-        var exec = require('child_process').exec;    
-        var path = process.argv[process.argv.length - 2].replace('--path=', '');
-        var pkPath = process.argv[process.argv.length - 1].replace('--pk=', '');
+
+        var exec = require('child_process').exec;
+        var path = process.argv[process.argv.length - 2].replace('--path=', '') || 'false';
+        var pkPath = process.argv[process.argv.length - 1].replace('--pk=', '') || 'false';
 
         if (path === 'false') {
             path = fixedPath;
@@ -444,18 +444,18 @@ describe('#### Google ####', function () {
                 });
             });
         });
-    
+
     });
 
     /***************************
     * With Public Key From ENV *
     ***************************/
-        
+
     it('Can validate google in-app-purchase with public key from ENV variable', function (done) {
-    
-        var exec = require('child_process').exec;    
-        var path = process.argv[process.argv.length - 2].replace('--path=', '');
-        var pkPath = process.argv[process.argv.length - 1].replace('--pk=', '');
+
+        var exec = require('child_process').exec;
+        var path = process.argv[process.argv.length - 2].replace('--path=', '') || 'false';
+        var pkPath = process.argv[process.argv.length - 1].replace('--pk=', '') || 'false';
 
         if (path === 'false') {
             path = fixedPath;
@@ -492,13 +492,13 @@ describe('#### Google ####', function () {
                 });
             });
         });
-    
+
     });
-    
+
     it('Can get an error message', function (done) {
-        
-        var path = process.argv[process.argv.length - 2].replace('--path=', '');
-        var pkPath = process.argv[process.argv.length - 1].replace('--pk=', '');
+
+        var path = process.argv[process.argv.length - 2].replace('--path=', '') || 'false';
+        var pkPath = process.argv[process.argv.length - 1].replace('--pk=', '') || 'false';
 
         if (path === 'false') {
             path = fixedPath;
@@ -520,7 +520,7 @@ describe('#### Google ####', function () {
                 done();
             });
         });
-    
+
     });
 
 
@@ -529,9 +529,9 @@ describe('#### Google ####', function () {
     /*******************************/
 
     it('Access to subscription even info has an invalid access token', function (done) {
-        
-        var path = process.argv[process.argv.length - 2].replace('--path=', '');
-        var pkPath = process.argv[process.argv.length - 1].replace('--pk=', '');
+
+        var path = process.argv[process.argv.length - 2].replace('--path=', '') || 'false';
+        var pkPath = process.argv[process.argv.length - 1].replace('--pk=', '') || 'false';
         var api = process.argv[process.argv.length - 3].replace('--api=', '');
 
         if (path === 'false') {
@@ -540,7 +540,7 @@ describe('#### Google ####', function () {
         if (pkPath === 'false') {
             pkPath = fixedPkPath;
         }
-        
+
         var iap = require('../');
         iap.reset();
         fs.readFile(api, function(error, data){
@@ -577,9 +577,9 @@ describe('#### Google ####', function () {
     });
 
     it('Cannot refresh access due to an invalid refresh token', function (done) {
-        
-        var path = process.argv[process.argv.length - 2].replace('--path=', '');
-        var pkPath = process.argv[process.argv.length - 1].replace('--pk=', '');
+
+        var path = process.argv[process.argv.length - 2].replace('--path=', '') || 'false';
+        var pkPath = process.argv[process.argv.length - 1].replace('--pk=', '') || 'false';
         var api = process.argv[process.argv.length - 3].replace('--api=', '');
 
         if (path === 'false') {
@@ -588,7 +588,7 @@ describe('#### Google ####', function () {
         if (pkPath === 'false') {
             pkPath = fixedPkPath;
         }
-        
+
         var iap = require('../');
         iap.reset();
         fs.readFile(api, function(error, data){
@@ -619,13 +619,13 @@ describe('#### Google ####', function () {
 
             });
         });
-        
+
     });
 
     it('Cannot call refresh access function if did not provide needed information', function (done) {
-        
-        var path = process.argv[process.argv.length - 2].replace('--path=', '');
-        var pkPath = process.argv[process.argv.length - 1].replace('--pk=', '');
+
+        var path = process.argv[process.argv.length - 2].replace('--path=', '') || 'false';
+        var pkPath = process.argv[process.argv.length - 1].replace('--pk=', '') || 'false';
         var api = process.argv[process.argv.length - 3].replace('--api=', '');
 
         if (path === 'false') {
@@ -634,7 +634,7 @@ describe('#### Google ####', function () {
         if (pkPath === 'false') {
             pkPath = fixedPkPath;
         }
-        
+
         var iap = require('../');
         iap.reset();
         fs.readFile(api, function(error, data){
@@ -662,18 +662,18 @@ describe('#### Google ####', function () {
 
             });
         });
-        
+
     });
 
     // /**********************************
     // * With Dynamically Fed Public Key *
     // **********************************/
-        
+
     it('Can validate Unity google in-app-purchase with dynamically fed public key', function (done) {
-    
-        var exec = require('child_process').exec;    
+
+        var exec = require('child_process').exec;
         var path = process.cwd() + '/test/receipts/unity_google';
-        var pkPath = process.argv[process.argv.length - 1].replace('--pk=', '');
+        var pkPath = process.argv[process.argv.length - 1].replace('--pk=', '') || 'false';
 
         if (path === 'false') {
             path = fixedPath;
@@ -712,14 +712,14 @@ describe('#### Google ####', function () {
                 });
             });
         });
-    
+
     });
-        
+
     it('Can validate google in-app-purchase with dynamically fed public key', function (done) {
-    
-        var exec = require('child_process').exec;    
-        var path = process.argv[process.argv.length - 2].replace('--path=', '');
-        var pkPath = process.argv[process.argv.length - 1].replace('--pk=', '');
+
+        var exec = require('child_process').exec;
+        var path = process.argv[process.argv.length - 2].replace('--path=', '') || 'false';
+        var pkPath = process.argv[process.argv.length - 1].replace('--pk=', '') || 'false';
 
         if (path === 'false') {
             path = fixedPath;
@@ -758,7 +758,7 @@ describe('#### Google ####', function () {
                 });
             });
         });
-    
+
     });
-    
+
 });

@@ -3,10 +3,14 @@ var fs = require('fs');
 var fixedPath = process.cwd() + '/test/receipts/facebook';
 var fixedAppAccessTokenPath = process.cwd() + '/test/receipts/facebook.app_token';
 
-describe('#### Facebook ####', function () {
 
-    var appAccessTokenPath = process.argv[process.argv.length - 2].replace('--appAccessToken=', '');
-    var receiptPath = process.argv[process.argv.length - 1].replace('--path=', '');
+// var receiptFile; try { receiptFile = fs.openSync(fixedPath); } catch {} if (!receiptFile) describe('#### Test ####', function () { it('is disabled', ()=>{});}); else
+
+describe('#### Facebook ####', function () {
+    try { fs.openSync(fixedPath); } catch {it.skip('is disabled', ()=>{});return}
+
+    var appAccessTokenPath = process.argv[process.argv.length - 2].replace('--appAccessToken=', '') || 'false';
+    var receiptPath = process.argv[process.argv.length - 1].replace('--path=', '') || 'false';
 
     if (appAccessTokenPath === 'false') {
         appAccessTokenPath = fixedAppAccessTokenPath;
@@ -49,7 +53,6 @@ describe('#### Facebook ####', function () {
             });
         });
     });
-
     it('Can NOT validate facebook in-app-purchase with incorrect receipt', function (done) {
         var iap = require('../');
         var fakeReceipt = 'MDAwMDA.e30K';
@@ -67,7 +70,6 @@ describe('#### Facebook ####', function () {
             });
         });
     });
-
     it('Can validate facebook in-app-purchase w/ Promise & auto-service detection', function (done) {
 
         if (!Promise) {
@@ -99,7 +101,6 @@ describe('#### Facebook ####', function () {
             done(error);
         });
     });
-
     it('Can validate facebook in-app-purchase w/ auto-service detection', function (done) {
         var iap = require('../');
         iap.config({
@@ -122,7 +123,6 @@ describe('#### Facebook ####', function () {
             });
         });
     });
-
     it('Can validate facebook in-app-purchase', function (done) {
         var iap = require('../');
         iap.config({
@@ -145,10 +145,9 @@ describe('#### Facebook ####', function () {
             });
         });
     });
-
     it('Can get an error response', function (done) {
         var iap = require('../');
-        var fakeReceipt = "MDAwMDA.e30K";
+        var fakeReceipt = 'MDAwMDA.e30K';
         iap.config({
             verbose: true,
             facebookAppSecret: appSecret,
@@ -166,7 +165,6 @@ describe('#### Facebook ####', function () {
             });
         });
     });
-
     it('Can validate facebook in-app-purchase using .validateOnce()', function (done) {
         var iap = require('../');
         iap.config({
@@ -189,7 +187,6 @@ describe('#### Facebook ####', function () {
             });
         });
     });
-
     it('Can validate facebook in-app-purchase using .validateOnce() w/ auto-service detection', function (done) {
         var iap = require('../');
         iap.config({

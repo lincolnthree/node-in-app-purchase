@@ -4,9 +4,9 @@ var fixedPath = process.cwd() + '/test/receipts/amazon';
 var fixedKeyPath = process.cwd() + '/test/receipts/amazon.secret';
 
 describe('#### Amazon ####', function () {
-        
-        var sharedKey = process.argv[process.argv.length - 2].replace('--sharedKey=', '');
-        var path = process.argv[process.argv.length - 1].replace('--path=', '');
+
+        var sharedKey = process.argv[process.argv.length - 2].replace('--sharedKey=', '') || 'false';
+        var path = process.argv[process.argv.length - 1].replace('--path=', '') || 'false';
         var iap = require('../');
 
         if (sharedKey === 'false') {
@@ -47,7 +47,7 @@ describe('#### Amazon ####', function () {
         });
 
         it('Can validate amazon in-app-purchase w/ Promise & auto-service detection', function (done) {
-                
+
                 if (!Promise) {
                         return done();
                 }
@@ -213,7 +213,7 @@ describe('#### Amazon ####', function () {
                         });
                         iap.config({ amazonAPIVersion: 2 });
                         iap.setup(function (error) {
-                                assert.equal(error);
+                                assert.equal(error, null);
                                 var set = iap.setAmazonValidationHost('fooooooo');
                                 assert.equal(set, true);
                                 var receipt = JSON.parse(data.toString());
@@ -223,7 +223,7 @@ describe('#### Amazon ####', function () {
                                         done();
                                 });
                         });
-                });        
+                });
         });
 
         it('Can reset validation host w/ Amazon API version 2', function (done) {
@@ -235,7 +235,7 @@ describe('#### Amazon ####', function () {
                         });
                         iap.config({ amazonAPIVersion: 2 });
                         iap.setup(function (error) {
-                                assert.equal(error);
+                                assert.equal(error, null);
                                 var set = iap.resetAmazonValidationHost();
                                 assert.equal(set, true);
                                 var receipt = JSON.parse(data.toString());
@@ -245,7 +245,7 @@ describe('#### Amazon ####', function () {
                                         done();
                                 });
                         });
-                });        
+                });
         });
 
 });

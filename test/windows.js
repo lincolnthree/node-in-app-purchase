@@ -1,12 +1,12 @@
-var assert = require('assert'); 
+var assert = require('assert');
 var fs = require('fs');
 var fixedPath = process.cwd() + '/test/receipts/windows';
 
 describe('#### Windows ####', function () {
-    
+
     it('Can validate windows in-app-purchase w/o waiting for .setup()', function (done) {
-        
-        var path = process.argv[process.argv.length - 1].replace('--path=', '');
+
+        var path = process.argv[process.argv.length - 1].replace('--path=', '') || 'false';
 
         if (path === 'false') {
             path = fixedPath;
@@ -31,21 +31,21 @@ describe('#### Windows ####', function () {
                 done();
             });
         });
-    
+
     });
-    
+
     it('Can validate windows in-app-purchase w/ Promise & auto-service detection', function (done) {
-        
+
         if (!Promise) {
             return done();
         }
-    
-        var path = process.argv[process.argv.length - 1].replace('--path=', '');
+
+        var path = process.argv[process.argv.length - 1].replace('--path=', '') || 'false';
 
         if (path === 'false') {
             path = fixedPath;
         }
-        
+
         var iap = require('../');
         var receipt = fs.readFileSync(path, 'utf8');
         var promise = iap.setup();
@@ -67,12 +67,12 @@ describe('#### Windows ####', function () {
         }).catch(function (error) {
             throw error;
         });
-    
+
     });
-    
+
     it('Can validate windows in-app-purchase w/ auto-service detection', function (done) {
-        
-        var path = process.argv[process.argv.length - 1].replace('--path=', '');
+
+        var path = process.argv[process.argv.length - 1].replace('--path=', '') || 'false';
 
         if (path === 'false') {
             path = fixedPath;
@@ -99,12 +99,12 @@ describe('#### Windows ####', function () {
                 });
             });
         });
-    
+
     });
-    
+
     it('Can validate windows in-app-purchase', function (done) {
-        
-        var path = process.argv[process.argv.length - 1].replace('--path=', '');
+
+        var path = process.argv[process.argv.length - 1].replace('--path=', '') || 'false';
 
         if (path === 'false') {
             path = fixedPath;
@@ -131,12 +131,12 @@ describe('#### Windows ####', function () {
                 });
             });
         });
-    
+
     });
-    
+
     it('Can validate windows in-app-purchase using .validateOnce() w/ auto-service detection', function (done) {
-        
-        var path = process.argv[process.argv.length - 1].replace('--path=', '');
+
+        var path = process.argv[process.argv.length - 1].replace('--path=', '') || 'false';
 
         if (path === 'false') {
             path = fixedPath;
@@ -163,12 +163,12 @@ describe('#### Windows ####', function () {
                 });
             });
         });
-    
+
     });
-    
+
     it('Can validate windows in-app-purchase using .validateOnce()', function (done) {
-        
-        var path = process.argv[process.argv.length - 1].replace('--path=', '');
+
+        var path = process.argv[process.argv.length - 1].replace('--path=', '') || 'false';
 
         if (path === 'false') {
             path = fixedPath;
@@ -195,12 +195,12 @@ describe('#### Windows ####', function () {
                 });
             });
         });
-    
+
     });
-    
+
     it('Can validate windows in-app-purchase and ignores expired item', function (done) {
-        
-        var path = process.argv[process.argv.length - 1].replace('--path=', '');
+
+        var path = process.argv[process.argv.length - 1].replace('--path=', '') || 'false';
 
         if (path === 'false') {
             path = fixedPath;
@@ -222,12 +222,12 @@ describe('#### Windows ####', function () {
                 });
             });
         });
-    
+
     });
-    
+
     it('Can NOT validate windows in-app-purchase with incorrect receipt w/ auto-service detection', function (done) {
-        
-        var path = process.argv[process.argv.length - 1].replace('--path=', '');
+
+        var path = process.argv[process.argv.length - 1].replace('--path=', '') || 'false';
 
         if (path === 'false') {
             path = fixedPath;
@@ -243,12 +243,12 @@ describe('#### Windows ####', function () {
                 done();
             });
         });
-    
+
     });
-    
+
     it('Can NOT validate windows in-app-purchase with incorrect receipt', function (done) {
-        
-        var path = process.argv[process.argv.length - 1].replace('--path=', '');
+
+        var path = process.argv[process.argv.length - 1].replace('--path=', '') || 'false';
 
         if (path === 'false') {
             path = fixedPath;
@@ -264,12 +264,12 @@ describe('#### Windows ####', function () {
                 done();
             });
         });
-    
+
     });
-    
+
     it('Can get an error response', function (done) {
-        
-        var path = process.argv[process.argv.length - 1].replace('--path=', '');
+
+        var path = process.argv[process.argv.length - 1].replace('--path=', '') || 'false';
 
         if (path === 'false') {
             path = fixedPath;
@@ -282,12 +282,12 @@ describe('#### Windows ####', function () {
             iap.validate(iap.WINDOWS, 'fake-receipt', function (error, response) {
                 assert(error);
                 assert(response.status);
-                                                                assert(response.message);
+                assert(response.message);
                 assert.equal(iap.isValidated(response), false);
                 done();
             });
         });
-    
+
     });
 
 });

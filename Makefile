@@ -29,14 +29,14 @@ gotest:
 
 .PHONY: amtest
 amtest:
-	./node_modules/mocha/bin/mocha test/amazon.js -R spec -b --timeout=5000 --sharedKey=false --path=false	
+	./node_modules/mocha/bin/mocha test/amazon.js -R spec -b --timeout=5000 --sharedKey=false --path=false
 
 .PHONY: witest
 witest:
 	./node_modules/mocha/bin/mocha test/windows.js -R spec -b --timeout=5000 --path=false
 
 .PHONY: fatest
-witest:
+fatest:
 	./node_modules/mocha/bin/mocha test/facebook.js -R spec -b --timeout=5000 --appAccessToken=false --path=false
 
 .PHONY: test-apple

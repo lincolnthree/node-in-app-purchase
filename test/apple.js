@@ -1,4 +1,4 @@
-var assert = require('assert'); 
+var assert = require('assert');
 var fs = require('fs');
 var fixedPath = process.cwd() + '/test/receipts/apple';
 
@@ -11,7 +11,7 @@ describe('#### Apple ####', function () {
             service: iap.APPLE,
             receipt: {
                 in_app: [],
-                latest_receipt_info: list    
+                latest_receipt_info: list
             }
         };
         var res = iap.getPurchaseData(data);
@@ -22,7 +22,7 @@ describe('#### Apple ####', function () {
         assert.equal(res[0].isTrial, false);
         done();
     });
-    
+
     it('Can validate Unity apple in-app-purchase w/ auto-service detection', function (done) {
 
         var path = process.cwd() + '/test/receipts/unity_apple';
@@ -52,12 +52,12 @@ describe('#### Apple ####', function () {
                 });
             });
         });
-    
+
     });
-    
+
     it('Can validate apple in-app-purchase w/ auto-service detection', function (done) {
-        
-        var path = process.argv[process.argv.length - 1].replace('--path=', '');
+
+        var path = process.argv[process.argv.length - 1].replace('--path=', '') || 'false';
 
         if (path === 'false') {
             path = fixedPath;
@@ -89,16 +89,16 @@ describe('#### Apple ####', function () {
                 });
             });
         });
-    
+
     });
-    
+
     it('Can validate apple in-app-purchase w/ Promise & auto service detection', function (done) {
-        
+
         if (!Promise) {
             return done();
         }
-    
-        var path = process.argv[process.argv.length - 1].replace('--path=', '');
+
+        var path = process.argv[process.argv.length - 1].replace('--path=', '')||'false';
 
         if (path === 'false') {
             path = fixedPath;
@@ -132,10 +132,10 @@ describe('#### Apple ####', function () {
         }
 
     });
-    
+
     it('Can validate apple in-app-purchase', function (done) {
-        
-        var path = process.argv[process.argv.length - 1].replace('--path=', '');
+
+        var path = process.argv[process.argv.length - 1].replace('--path=', '')||'false';
 
         if (path === 'false') {
             path = fixedPath;
@@ -164,12 +164,12 @@ describe('#### Apple ####', function () {
                 });
             });
         });
-    
+
     });
-    
+
     it('Can validate apple in-app-purchase w/ .validateOnce() and w/ auto-service detection', function (done) {
-        
-        var path = process.argv[process.argv.length - 1].replace('--path=', '');
+
+        var path = process.argv[process.argv.length - 1].replace('--path=', '') || 'false';
 
         if (path === 'false') {
             path = fixedPath;
@@ -198,11 +198,11 @@ describe('#### Apple ####', function () {
                 });
             });
         });
-    
+
     });
-    
+
     it('Can validate Unity apple in-app-purchase w/ .validateOnce()', function (done) {
-        
+
         var path = process.cwd() + '/test/receipts/unity_apple';
         var iap = require('../');
         iap.config({
@@ -227,12 +227,12 @@ describe('#### Apple ####', function () {
                 });
             });
         });
-    
+
     });
-    
+
     it('Can validate apple in-app-purchase w/ .validateOnce()', function (done) {
-        
-        var path = process.argv[process.argv.length - 1].replace('--path=', '');
+
+        var path = process.argv[process.argv.length - 1].replace('--path=', '') || 'false';
 
         if (path === 'false') {
             path = fixedPath;
@@ -261,12 +261,12 @@ describe('#### Apple ####', function () {
                 });
             });
         });
-    
+
     });
-    
+
     it('Can NOT validate apple in-app-purchase with incorrect receipt w/ auto-service detection', function (done) {
-        
-        var path = process.argv[process.argv.length - 1].replace('--path=', '');
+
+        var path = process.argv[process.argv.length - 1].replace('--path=', '') || 'false';
 
         if (path === 'false') {
             path = fixedPath;
@@ -284,12 +284,12 @@ describe('#### Apple ####', function () {
                 done();
             });
         });
-    
+
     });
-    
+
     it('Can NOT validate apple in-app-purchase with incorrect receipt', function (done) {
-        
-        var path = process.argv[process.argv.length - 1].replace('--path=', '');
+
+        var path = process.argv[process.argv.length - 1].replace('--path=', '') || 'false';
 
         if (path === 'false') {
             path = fixedPath;
@@ -307,12 +307,12 @@ describe('#### Apple ####', function () {
                 done();
             });
         });
-    
+
     });
-    
+
     it('Can get an error response', function (done) {
-        
-        var path = process.argv[process.argv.length - 1].replace('--path=', '');
+
+        var path = process.argv[process.argv.length - 1].replace('--path=', '') || 'false';
 
         if (path === 'false') {
             path = fixedPath;
@@ -331,7 +331,7 @@ describe('#### Apple ####', function () {
                 done();
             });
         });
-    
+
     });
 
     it('Can detect a valid receipt that bought nothing', function (done) {
@@ -352,7 +352,7 @@ describe('#### Apple ####', function () {
         var rec = {
             service: iap.APPLE,
             receipt: {
-                in_app: [ 
+                in_app: [
                     { quantity: '1',
                     product_id: 'in_app.0',
                     transaction_id: '210000259386802',
@@ -427,7 +427,7 @@ describe('#### Apple ####', function () {
         var rec = {
             service: iap.APPLE,
             receipt: {
-                in_app: [ 
+                in_app: [
                     { quantity: '1',
                     product_id: 'in_app.0',
                     transaction_id: '210000259386802',
