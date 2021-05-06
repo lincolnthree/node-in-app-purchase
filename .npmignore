@@ -4,3 +4,4 @@ logo
 .travis.yml
 lint
 scripts
+.idea
