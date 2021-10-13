@@ -1,7 +1,7 @@
 ## This is a fork of https://www.github.com/voltrue2/in-app-purchase
 The intent is to support newer versions of the billing APIs, e.g. Google now requires purchases to be acknowledged
 
-### Original unmodified README follows
+### Original unmodified README follows (removed broken demo link)
 
 ![Logo](https://user-images.githubusercontent.com/2267361/42299566-e25ee852-8046-11e8-9cc3-a776770fcc8e.png)
 
@@ -27,7 +27,7 @@ Thank you for the input [maxs15](https://github.com/maxs15)
 
 ## Online Demo and Documention
 
-<a href="http://iap.gracenode.org" target="_blank">Online Demo</a>
+<a href="" target="_blank"><strike>Online Demo</strike></a>
 
 ## How to install
 

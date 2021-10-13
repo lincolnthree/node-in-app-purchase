@@ -1,20 +1,14 @@
 var assert = require('assert');
 var fs = require('fs');
+var utils = require('./utils');
 var fixedPath = process.cwd() + '/test/receipts/amazon';
 var fixedKeyPath = process.cwd() + '/test/receipts/amazon.secret';
 
 describe('#### Amazon ####', function () {
 
-        var sharedKey = process.argv[process.argv.length - 2].replace('--sharedKey=', '') || 'false';
-        var path = process.argv[process.argv.length - 1].replace('--path=', '') || 'false';
+        var sharedKey = utils.getArg('sharedkey', fixedKeyPath);
+        var path = utils.getArg('path', fixedPath);
         var iap = require('../');
-
-        if (sharedKey === 'false') {
-                sharedKey = fixedKeyPath;
-        }
-        if (path === 'false') {
-                path = fixedPath;
-        }
 
         it('Can NOT validate amazon in-app-purchase with incorrect receipt w/ auto-service detection', function (done) {
                 var fakeReceipt = { userId: null, receiptId: 'fake-receipt' };
@@ -53,7 +47,7 @@ describe('#### Amazon ####', function () {
                 }
 
                 fs.readFile(path, 'UTF-8', function (error, data) {
-                        assert.equal(error, null);
+                        assert.strictEqual(error, null);
                         iap.config({
                                 verbose: true,
                                 secret: sharedKey
@@ -63,7 +57,7 @@ describe('#### Amazon ####', function () {
                                 var receipt = JSON.parse(data.toString());
                                 var val = iap.validate(receipt);
                                 val.then(function (response) {
-                                        assert.equal(iap.isValidated(response), true);
+                                        assert.strictEqual(iap.isValidated(response), true);
                                         var pdata = iap.getPurchaseData(response);
                                         for (var i = 0, len = pdata.length; i < len; i++) {
                                                 assert(pdata[i].productId);

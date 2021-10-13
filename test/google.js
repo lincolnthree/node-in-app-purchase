@@ -2,6 +2,7 @@ var assert = require('assert');
 var fs = require('fs');
 var fixedPath = process.cwd() + '/test/receipts/google';
 var fixedPkPath = process.cwd() + '/test/receipts/google_pub/';
+var utils = require('./utils');
 
 describe('#### Google ####', function () {
 
@@ -11,15 +12,8 @@ describe('#### Google ####', function () {
 
     it('Cannot validate google in-app-purchase with a receipt.data that is not a string', function (done) {
 
-        var path = process.argv[process.argv.length - 2].replace('--path=', '') || 'false';
-        var pkPath = process.argv[process.argv.length - 1].replace('--pk=', '') || 'false';
-
-        if (path === 'false') {
-            path = fixedPath;
-        }
-        if (pkPath === 'false') {
-            pkPath = fixedPkPath;
-        }
+        var path = utils.getArg('path', fixedPath);
+        var pkPath = utils.getArg('pk', fixedPkPath);
 
         var iap = require('../');
         iap.config({
@@ -27,15 +21,15 @@ describe('#### Google ####', function () {
             googlePublicKeyPath: pkPath
         });
         iap.setup(function (error) {
-            assert.equal(error, undefined);
+            assert.strictEqual(error, undefined);
             fs.readFile(path, function (error, data) {
-                assert.equal(error, undefined);
+                assert.strictEqual(error, null);
                 var receipt = JSON.parse(data.toString());
                 receipt.data = {};
                 iap.validate(iap.GOOGLE, receipt, function (error, response) {
                     assert(error);
                     //assert.equal(error.message, 'receipt.data must be a string');
-                    assert.equal(iap.isValidated(response), false);
+                    assert.strictEqual(iap.isValidated(response), false);
                     done();
                 });
             });
@@ -46,11 +40,7 @@ describe('#### Google ####', function () {
     it('Can validate Unity google in-app-purchase w/ auto-service detection', function (done) {
 
         var path = process.cwd() + '/test/receipts/unity_google';
-        var pkPath = process.argv[process.argv.length - 1].replace('--pk=', '') || 'false';
-
-        if (pkPath === 'false') {
-            pkPath = fixedPkPath;
-        }
+        var pkPath = utils.getArg('pk', fixedPkPath);
 
         var iap = require('../');
         iap.config({
@@ -58,14 +48,14 @@ describe('#### Google ####', function () {
             googlePublicKeyPath: pkPath
         });
         iap.setup(function (error) {
-            assert.equal(error, undefined);
+            assert.strictEqual(error, undefined);
             fs.readFile(path, function (error, data) {
                 assert.equal(error, undefined);
                 var receipt = JSON.parse(data.toString());
                 iap.validate(receipt, function (error, response) {
                 console.log('>>>>>>>>>>>>>>>>', response);
-                    assert.equal(error, undefined);
-                    assert.equal(iap.isValidated(response), true);
+                    assert.strictEqual(error, null);
+                    assert.strictEqual(iap.isValidated(response), true);
                     var data = iap.getPurchaseData(response);
                     for (var i = 0, len = data.length; i < len; i++) {
                         console.log('parsed purchased data', i, data[i]);
@@ -83,15 +73,8 @@ describe('#### Google ####', function () {
 
     it('Can validate google in-app-purchase w/ auto-service detection', function (done) {
 
-        var path = process.argv[process.argv.length - 2].replace('--path=', '') || 'false';
-        var pkPath = process.argv[process.argv.length - 1].replace('--pk=', '') || 'false';
-
-        if (path === 'false') {
-            path = fixedPath;
-        }
-        if (pkPath === 'false') {
-            pkPath = fixedPkPath;
-        }
+        var path = utils.getArg('path', fixedPath);
+        var pkPath = utils.getArg('pk', fixedPkPath);
 
         var iap = require('../');
         iap.config({
@@ -128,15 +111,8 @@ describe('#### Google ####', function () {
             return done();
         }
 
-        var path = process.argv[process.argv.length - 2].replace('--path=', '') || 'false';
-        var pkPath = process.argv[process.argv.length - 1].replace('--pk=', '') || 'false';
-
-        if (path === 'false') {
-            path = fixedPath;
-        }
-        if (pkPath === 'false') {
-            pkPath = fixedPkPath;
-        }
+        var path = utils.getArg('path', fixedPath);
+        var pkPath = utils.getArg('pk', fixedPkPath);
 
         var iap = require('../');
         iap.config({
@@ -170,15 +146,8 @@ describe('#### Google ####', function () {
 
     it('Can validate google in-app-purchase', function (done) {
 
-        var path = process.argv[process.argv.length - 2].replace('--path=', '') || 'false';
-        var pkPath = process.argv[process.argv.length - 1].replace('--pk=', '') || 'false';
-
-        if (path === 'false') {
-            path = fixedPath;
-        }
-        if (pkPath === 'false') {
-            pkPath = fixedPkPath;
-        }
+        var path = utils.getArg('path', fixedPath);
+        var pkPath = utils.getArg('pk', fixedPkPath);
 
         var iap = require('../');
         iap.config({
@@ -211,15 +180,8 @@ describe('#### Google ####', function () {
 
     it('Can auto-stringify purchase receipt object and validate google in-app-purchase', function (done) {
 
-        var path = process.argv[process.argv.length - 2].replace('--path=', '') || 'false';
-        var pkPath = process.argv[process.argv.length - 1].replace('--pk=', '') || 'false';
-
-        if (path === 'false') {
-            path = fixedPath;
-        }
-        if (pkPath === 'false') {
-            pkPath = fixedPkPath;
-        }
+        var path = utils.getArg('path', fixedPath);
+        var pkPath = utils.getArg('pk', fixedPkPath);
 
         var iap = require('../');
         iap.config({
@@ -251,15 +213,8 @@ describe('#### Google ####', function () {
 
     it('Can NOT validate google in-app-purchase with incorrect receipt w/ auto-service detection', function (done) {
 
-        var path = process.argv[process.argv.length - 2].replace('--path=', '') || 'false';
-        var pkPath = process.argv[process.argv.length - 1].replace('--pk=', '') || 'false';
-
-        if (path === 'false') {
-            path = fixedPath;
-        }
-        if (pkPath === 'false') {
-            pkPath = fixedPkPath;
-        }
+        var path = utils.getArg('path', fixedPath);
+        var pkPath = utils.getArg('pk', fixedPkPath);
 
         var iap = require('../');
         iap.config({
@@ -279,15 +234,8 @@ describe('#### Google ####', function () {
 
     it('Can NOT validate google in-app-purchase with incorrect receipt', function (done) {
 
-        var path = process.argv[process.argv.length - 2].replace('--path=', '') || 'false';
-        var pkPath = process.argv[process.argv.length - 1].replace('--pk=', '') || 'false';
-
-        if (path === 'false') {
-            path = fixedPath;
-        }
-        if (pkPath === 'false') {
-            pkPath = fixedPkPath;
-        }
+        var path = utils.getArg('path', fixedPath);
+        var pkPath = utils.getArg('pk', fixedPkPath);
 
         var iap = require('../');
         iap.config({
@@ -307,15 +255,8 @@ describe('#### Google ####', function () {
 
     it('Can validate google in-app-purchase and check subscription state and fail', function (done) {
 
-        var path = process.argv[process.argv.length - 2].replace('--path=', '') || 'false';
-        var pkPath = process.argv[process.argv.length - 1].replace('--pk=', '') || 'false';
-
-        if (path === 'false') {
-            path = fixedPath;
-        }
-        if (pkPath === 'false') {
-            pkPath = fixedPkPath;
-        }
+        var path = utils.getArg('path', fixedPath);
+        var pkPath = utils.getArg('pk', fixedPkPath);
 
         var iap = require('../');
         iap.config({
@@ -350,15 +291,8 @@ describe('#### Google ####', function () {
     it('Can validate google in-app-purchase with public key as string "googlePublicKeyStrLive"', function (done) {
 
         var exec = require('child_process').exec;
-        var path = process.argv[process.argv.length - 2].replace('--path=', '') || 'false';
-        var pkPath = process.argv[process.argv.length - 1].replace('--pk=', '') || 'false';
-
-        if (path === 'false') {
-            path = fixedPath;
-        }
-        if (pkPath === 'false') {
-            pkPath = fixedPkPath;
-        }
+        var path = utils.getArg('path', fixedPath);
+        var pkPath = utils.getArg('pk', fixedPkPath);
 
         var iap = require('../');
         iap.reset();
@@ -400,15 +334,8 @@ describe('#### Google ####', function () {
     it('Can validate google in-app-purchase with public key as string "googlePublicKeyStrLive"', function (done) {
 
         var exec = require('child_process').exec;
-        var path = process.argv[process.argv.length - 2].replace('--path=', '') || 'false';
-        var pkPath = process.argv[process.argv.length - 1].replace('--pk=', '') || 'false';
-
-        if (path === 'false') {
-            path = fixedPath;
-        }
-        if (pkPath === 'false') {
-            pkPath = fixedPkPath;
-        }
+        var path = utils.getArg('path', fixedPath);
+        var pkPath = utils.getArg('pk', fixedPkPath);
 
         var iap = require('../');
         iap.reset();
@@ -454,8 +381,8 @@ describe('#### Google ####', function () {
     it('Can validate google in-app-purchase with public key from ENV variable', function (done) {
 
         var exec = require('child_process').exec;
-        var path = process.argv[process.argv.length - 2].replace('--path=', '') || 'false';
-        var pkPath = process.argv[process.argv.length - 1].replace('--pk=', '') || 'false';
+        var path = process.env.RECEIPT_PATH || 'false';
+        var pkPath = process.env.SHARED_KEY || 'false';
 
         if (path === 'false') {
             path = fixedPath;
@@ -497,15 +424,8 @@ describe('#### Google ####', function () {
 
     it('Can get an error message', function (done) {
 
-        var path = process.argv[process.argv.length - 2].replace('--path=', '') || 'false';
-        var pkPath = process.argv[process.argv.length - 1].replace('--pk=', '') || 'false';
-
-        if (path === 'false') {
-            path = fixedPath;
-        }
-        if (pkPath === 'false') {
-            pkPath = fixedPkPath;
-        }
+        var path = utils.getArg('path', fixedPath);
+        var pkPath = utils.getArg('pk', fixedPkPath);
 
         var iap = require('../');
         iap.config({
@@ -530,16 +450,9 @@ describe('#### Google ####', function () {
 
     it('Access to subscription even info has an invalid access token', function (done) {
 
-        var path = process.argv[process.argv.length - 2].replace('--path=', '') || 'false';
-        var pkPath = process.argv[process.argv.length - 1].replace('--pk=', '') || 'false';
-        var api = process.argv[process.argv.length - 3].replace('--api=', '');
-
-        if (path === 'false') {
-            path = fixedPath;
-        }
-        if (pkPath === 'false') {
-            pkPath = fixedPkPath;
-        }
+        var path = utils.getArg('path', fixedPath);
+        var pkPath = utils.getArg('pk', fixedPkPath);
+        var api = utils.getArg('api', '');
 
         var iap = require('../');
         iap.reset();
@@ -578,16 +491,9 @@ describe('#### Google ####', function () {
 
     it('Cannot refresh access due to an invalid refresh token', function (done) {
 
-        var path = process.argv[process.argv.length - 2].replace('--path=', '') || 'false';
-        var pkPath = process.argv[process.argv.length - 1].replace('--pk=', '') || 'false';
-        var api = process.argv[process.argv.length - 3].replace('--api=', '');
-
-        if (path === 'false') {
-            path = fixedPath;
-        }
-        if (pkPath === 'false') {
-            pkPath = fixedPkPath;
-        }
+        var path = utils.getArg('path', fixedPath);
+        var pkPath = utils.getArg('pk', fixedPkPath);
+        var api = utils.getArg('api', '');
 
         var iap = require('../');
         iap.reset();
@@ -624,16 +530,9 @@ describe('#### Google ####', function () {
 
     it('Cannot call refresh access function if did not provide needed information', function (done) {
 
-        var path = process.argv[process.argv.length - 2].replace('--path=', '') || 'false';
-        var pkPath = process.argv[process.argv.length - 1].replace('--pk=', '') || 'false';
-        var api = process.argv[process.argv.length - 3].replace('--api=', '');
-
-        if (path === 'false') {
-            path = fixedPath;
-        }
-        if (pkPath === 'false') {
-            pkPath = fixedPkPath;
-        }
+        var path = utils.getArg('path', fixedPath);
+        var pkPath = utils.getArg('pk', fixedPkPath);
+        var api = utils.getArg('api', '');
 
         var iap = require('../');
         iap.reset();
@@ -672,15 +571,8 @@ describe('#### Google ####', function () {
     it('Can validate Unity google in-app-purchase with dynamically fed public key', function (done) {
 
         var exec = require('child_process').exec;
-        var path = process.cwd() + '/test/receipts/unity_google';
-        var pkPath = process.argv[process.argv.length - 1].replace('--pk=', '') || 'false';
-
-        if (path === 'false') {
-            path = fixedPath;
-        }
-        if (pkPath === 'false') {
-            pkPath = fixedPkPath;
-        }
+        var path = utils.getArg('path', process.cwd() + '/test/receipts/unity_google');
+        var pkPath = utils.getArg('pk', fixedPkPath);
 
         var iap = require('../');
         iap.reset();
@@ -718,15 +610,8 @@ describe('#### Google ####', function () {
     it('Can validate google in-app-purchase with dynamically fed public key', function (done) {
 
         var exec = require('child_process').exec;
-        var path = process.argv[process.argv.length - 2].replace('--path=', '') || 'false';
-        var pkPath = process.argv[process.argv.length - 1].replace('--pk=', '') || 'false';
-
-        if (path === 'false') {
-            path = fixedPath;
-        }
-        if (pkPath === 'false') {
-            pkPath = fixedPkPath;
-        }
+        var path = utils.getArg('path', fixedPath);
+        var pkPath = utils.getArg('pk', fixedPkPath);
 
         var iap = require('../');
         iap.reset();

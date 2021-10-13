@@ -1,16 +1,13 @@
 var assert = require('assert');
 var fs = require('fs');
+var utils = require('./utils');
 var fixedPath = process.cwd() + '/test/receipts/windows';
 
 describe('#### Windows ####', function () {
 
     it('Can validate windows in-app-purchase w/o waiting for .setup()', function (done) {
 
-        var path = process.argv[process.argv.length - 1].replace('--path=', '') || 'false';
-
-        if (path === 'false') {
-            path = fixedPath;
-        }
+        var path = utils.getArg('path', fixedPath);
 
         var iap = require('../');
         iap.config({ verbose: true });
@@ -40,11 +37,7 @@ describe('#### Windows ####', function () {
             return done();
         }
 
-        var path = process.argv[process.argv.length - 1].replace('--path=', '') || 'false';
-
-        if (path === 'false') {
-            path = fixedPath;
-        }
+        var path = utils.getArg('path', fixedPath);
 
         var iap = require('../');
         var receipt = fs.readFileSync(path, 'utf8');
@@ -72,11 +65,7 @@ describe('#### Windows ####', function () {
 
     it('Can validate windows in-app-purchase w/ auto-service detection', function (done) {
 
-        var path = process.argv[process.argv.length - 1].replace('--path=', '') || 'false';
-
-        if (path === 'false') {
-            path = fixedPath;
-        }
+        var path = utils.getArg('path', fixedPath);
 
         var iap = require('../');
         iap.config({ verbose: true });
@@ -104,11 +93,7 @@ describe('#### Windows ####', function () {
 
     it('Can validate windows in-app-purchase', function (done) {
 
-        var path = process.argv[process.argv.length - 1].replace('--path=', '') || 'false';
-
-        if (path === 'false') {
-            path = fixedPath;
-        }
+        var path = utils.getArg('path', fixedPath);
 
         var iap = require('../');
         iap.config({ verbose: true });
@@ -136,11 +121,7 @@ describe('#### Windows ####', function () {
 
     it('Can validate windows in-app-purchase using .validateOnce() w/ auto-service detection', function (done) {
 
-        var path = process.argv[process.argv.length - 1].replace('--path=', '') || 'false';
-
-        if (path === 'false') {
-            path = fixedPath;
-        }
+        var path = utils.getArg('path', fixedPath);
 
         var iap = require('../');
         iap.config({ verbose: true });
@@ -168,11 +149,7 @@ describe('#### Windows ####', function () {
 
     it('Can validate windows in-app-purchase using .validateOnce()', function (done) {
 
-        var path = process.argv[process.argv.length - 1].replace('--path=', '') || 'false';
-
-        if (path === 'false') {
-            path = fixedPath;
-        }
+        var path = utils.getArg('path', fixedPath);
 
         var iap = require('../');
         iap.config({ verbose: true });
@@ -200,11 +177,7 @@ describe('#### Windows ####', function () {
 
     it('Can validate windows in-app-purchase and ignores expired item', function (done) {
 
-        var path = process.argv[process.argv.length - 1].replace('--path=', '') || 'false';
-
-        if (path === 'false') {
-            path = fixedPath;
-        }
+        var path = utils.getArg('path', fixedPath);
 
         var iap = require('../');
         iap.config({ verbose: true });
@@ -227,12 +200,6 @@ describe('#### Windows ####', function () {
 
     it('Can NOT validate windows in-app-purchase with incorrect receipt w/ auto-service detection', function (done) {
 
-        var path = process.argv[process.argv.length - 1].replace('--path=', '') || 'false';
-
-        if (path === 'false') {
-            path = fixedPath;
-        }
-
         var iap = require('../');
         iap.config({ verbose: true });
         iap.setup(function (error) {
@@ -248,12 +215,6 @@ describe('#### Windows ####', function () {
 
     it('Can NOT validate windows in-app-purchase with incorrect receipt', function (done) {
 
-        var path = process.argv[process.argv.length - 1].replace('--path=', '') || 'false';
-
-        if (path === 'false') {
-            path = fixedPath;
-        }
-
         var iap = require('../');
         iap.config({ verbose: true });
         iap.setup(function (error) {
@@ -268,12 +229,6 @@ describe('#### Windows ####', function () {
     });
 
     it('Can get an error response', function (done) {
-
-        var path = process.argv[process.argv.length - 1].replace('--path=', '') || 'false';
-
-        if (path === 'false') {
-            path = fixedPath;
-        }
 
         var iap = require('../');
         iap.config({ verbose: true });

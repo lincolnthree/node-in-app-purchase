@@ -12,12 +12,7 @@ lint:
 	./lint
 
 .PHONY: test
-test:
-	./node_modules/mocha/bin/mocha test/apple.js -R spec -b --timeout=5000 --path=false
-	./node_modules/mocha/bin/mocha test/google.js -R spec -b --path=false --pk=false
-	./node_modules/mocha/bin/mocha test/amazon.js -R spec -b --timeout=5000 --sharedKey=false --path=false
-	./node_modules/mocha/bin/mocha test/windows.js -R spec -b --timeout=5000 --path=false
-	./node_modules/mocha/bin/mocha test/facebook.js -R spec -b --timeout=5000 --appAccessToken=false --path=false
+test: aptest gotest amtest witest fatest
 
 .PHONY: aptest
 aptest:
