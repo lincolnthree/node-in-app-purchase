@@ -18,12 +18,13 @@ var amazon;
 function handlePromisedFunctionCb(resolve, reject) {
     return function _handlePromisedCallback(error, response) {
         if (error) {
-            var errorData = { error: error, status: null, message: null };
+            var errorData = { error: error, status: null, message: null, data: null };
             if (response !== null && typeof response === 'object') {
                 errorData.status = response.status;
                 errorData.message = response.message;
+                errorData.data = response;
             }
-            return reject(JSON.stringify(errorData), response);
+            return reject(errorData);
         }
         return resolve(response);
     };
